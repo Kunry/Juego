@@ -34,7 +34,8 @@ Cookies.prototype.obtener = function(clave) {
     return "";
 }
 Cookies.prototype.control = function() {
-    if (this.obtener("Points")) {
+    debugger;
+    if (!this.obtener("Points")) {
         this.crearCookie("Points", this.game.points.point, 60)
     }
     this.maxpoints = this.obtener("Points");
