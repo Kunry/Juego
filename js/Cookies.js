@@ -34,13 +34,11 @@ Cookies.prototype.obtener = function(clave) {
     return "";
 }
 Cookies.prototype.control = function() {
-    debugger;
     if (!this.obtener("Points")) {
         this.crearCookie("Points", this.game.points.point, 60)
     }
     this.maxpoints = this.obtener("Points");
     this.read();
-    debugger;
     if (this.maxpoints < this.game.points.point) {
         this.crearCookie("Points", this.game.points.point, 60);
         this.game.points.drawRecord();

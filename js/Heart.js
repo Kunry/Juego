@@ -7,7 +7,7 @@ function Heart(game, img) {
     this.h = this.game.canvas.height * 0.05;
 
     this.img = img;
-    this.live = 1;
+    this.live = 3;
 }
 Heart.prototype.draw = function () {
     var w = 0;

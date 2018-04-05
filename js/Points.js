@@ -4,7 +4,7 @@ function Points(game) {
 
     this.x = this.game.canvas.width * 0.02;
     this.y = this.game.canvas.height * 0.05;
-    this.point = 20;
+    this.point = 0;
 
     this.img = new Image();
     this.img.src = "img/game.png"
