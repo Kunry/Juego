@@ -1,7 +1,6 @@
 var game;
-window.onload = function (){
-    game = new Game("canvas");
+window.onload = function() {
+  game = new Game("canvas");
 
-    game.start();
-}
-
+  game.start();
+};

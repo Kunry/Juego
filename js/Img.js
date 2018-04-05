@@ -1,3 +1,4 @@
+
 var IMG = function(game) {
   this.cookie = new Image();
   this.cookie.src = "img/ga.png";
@@ -16,12 +17,8 @@ var IMG = function(game) {
 
   this.ball = new Image();
   this.ball.src = "img/ball.png";
+  
 
-  this.background = new Image();
-  this.background.src = "img/fondoj.png";
-
-  this.backgroundI = new Image();
-  this.backgroundI.src = "img/fondo.png";
 
   this.hearts = new Image();
   this.hearts.src = "img/co.png";

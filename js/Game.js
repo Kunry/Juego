@@ -6,12 +6,13 @@ function Game(id) {
   this.ctx = this.canvas.getContext("2d");
 
   this.img = new IMG(this);
-  this.background = new Background(this, this.img.background);
+  this.background = new Background(this);
   this.player1 = new Player(this, this.canvas.width * 0.1);
   this.player = new Player(this, this.canvas.width * 0.9);
   this.points = new Points(this);
   this.heart = new Heart(this, this.img.heart);
   this.bat = new Bat(this);
+  this.cookies = new Cookies(this);
   this.cookie = [];
   this.pause = false;
   this.cont = 0;
@@ -47,7 +48,7 @@ Game.prototype.start = function() {
   );
 };
 Game.prototype.generateBat = function() {
-  if (this.points.point % 50 === 0) {
+  if (this.points.point % 50 === 0 && this.points.point != 0) {
     this.batt();
   }
 };
@@ -146,6 +147,7 @@ Game.prototype.gameOver = function() {
   this.background.draw();
   this.points.gameOver();
   this.points.draw();
+  this.cookies.control();
 };
 Game.prototype.noeat = function(y, index) {
   if (y >= this.canvas.height * 0.9) {

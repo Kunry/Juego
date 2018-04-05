@@ -4,7 +4,7 @@ function Points(game) {
 
     this.x = this.game.canvas.width * 0.02;
     this.y = this.game.canvas.height * 0.05;
-    this.point = 50;
+    this.point = 20;
 
     this.img = new Image();
     this.img.src = "img/game.png"
@@ -20,6 +20,11 @@ Points.prototype.add = function() {
 }
 Points.prototype.gameOver = function() {
     this.game.ctx.drawImage(this.img, this.game.canvas.width * 0.5 - (this.img.width / 2), this.game.canvas.height * 0.4);
-    this.x = this.game.canvas.width * 0.49;
+    this.x = this.game.canvas.width * 0.485;
     this.y = this.game.canvas.height / 2;
+}
+Points.prototype.drawRecord = function() {
+    this.game.ctx.font = "2em Verdana";
+    this.game.ctx.fillStyle = "Red";
+    this.game.ctx.fillText("RECORD", this.game.canvas.width * 0.45, this.game.canvas.height * 0.6    );
 }
