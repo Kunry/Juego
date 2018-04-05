@@ -7,12 +7,13 @@ function Game(id) {
 
   this.img = new IMG(this);
   this.background = new Background(this, this.img.background);
-  this.player = new Player(this, this.canvas.width * 0.1);
-  this.player1 = new Player(this, this.canvas.width * 0.9);
+  this.player1 = new Player(this, this.canvas.width * 0.1);
+  this.player = new Player(this, this.canvas.width * 0.9);
   this.points = new Points(this);
   this.heart = new Heart(this, this.img.heart);
   this.bat = new Bat(this);
   this.cookie = [];
+  this.pause = false;
   this.cont = 0;
   this.cont2 = 100;
 }
@@ -23,13 +24,13 @@ Game.prototype.cont22 = function() {
 };
 Game.prototype.start = function() {
   this.setListeners();
-  setInterval(
+  this.interval = setInterval(
     function() {
       this.clear();
       this.draw();
       this.move();
       this.generateBat();
-      
+
       if (this.cont++ > this.cont2) {
         this.numRandom();
         this.cont22();
@@ -46,10 +47,10 @@ Game.prototype.start = function() {
   );
 };
 Game.prototype.generateBat = function() {
-  if (this.points.point % 50 === 0 ) {
+  if (this.points.point % 50 === 0) {
     this.batt();
   }
-}
+};
 Game.prototype.clear = function() {
   this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 };
@@ -110,7 +111,6 @@ Game.prototype.collision = function() {
           this.bat.x <= e.x &&
           this.bat.y + this.bat.h >= e.y
         ) {
-          boolean = true;
           e.img = this.img.ball;
           e.index = 1000;
         }
@@ -141,7 +141,11 @@ Game.prototype.collision = function() {
   return boolean;
 };
 Game.prototype.gameOver = function() {
-  alert("Perdiste");
+  clearInterval(this.interval);
+  this.clear();
+  this.background.draw();
+  this.points.gameOver();
+  this.points.draw();
 };
 Game.prototype.noeat = function(y, index) {
   if (y >= this.canvas.height * 0.9) {
@@ -185,7 +189,9 @@ Game.prototype.setListeners = function() {
     if (e.keyCode === KEY_SPACE) {
       this.player1.createBullet();
     }
-    if (e.keycode === KEY_P) {
+    if (e.keyCode === KEY_P) {
+      if (!this.pause) this.pause = true;
+      else this.pause = false;
       this.stop();
     }
   }.bind(this);
@@ -208,9 +214,12 @@ Game.prototype.batt = function() {
   this.bat.live = true;
 };
 Game.prototype.stop = function() {
-  console.log("P");
-  clearInterval(this.setInterval);
-}
+  if (this.pause) {
+    clearInterval(this.interval);
+  } else {
+    this.start();
+  }
+};
 var KEY_RIGHT = 39;
 var KEY_LEFT = 37;
 var KEY_NUM0 = 96;
